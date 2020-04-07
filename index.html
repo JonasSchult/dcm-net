@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>DualConvMesh-Net: Joint Geodesic and Euclidean Convolutions on 3D Meshes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./w3.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1168479-11"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-1168479-11');
+  </script>
+
+</head>
+
+<body>
+
+<!-- Links (sit on top) -->
+<div class="w3-top">
+  <div class="w3-row w3-padding w3-black">
+    <div class="w3-col s4"><a href="#publication" class="w3-button w3-block w3-black">Publication</a></div>
+    <div class="w3-col s4"><a href="#code" class="w3-button w3-block w3-black">Code</a></div>
+    <div class="w3-col s4"><a href="#bibtex" class="w3-button w3-block w3-black">BibTex</a></div>
+  </div>
+</div>
+
+</br>
+</br>
+</br>
+
+<h3 align="center" id="title">DualConvMesh-Net: Joint Geodesic and Euclidean Convolutions on 3D Meshes</h3>
+  <p align="center" class="center_text" id="authors">
+    <a target="_blank" href="https://www.vision.rwth-aachen.de/person/219/">Jonas Schult</a><sup>*</sup>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a target="_blank" href="http://francisengelmann.github.com/">Francis Engelmann</a><sup>*</sup>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a target="_blank" href="https://www.vision.rwth-aachen.de/person/15/">Theodora Kontogianni</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a target="_blank" href="https://www.vision.rwth-aachen.de/person/1/">Bastian Leibe</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+  </p>
+
+  <p class="center_text" align="center">RWTH Aachen University, Computer Vision Group</p>
+
+  <p align="center" id="title">IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2020. <b>Oral Presentation</b></p>
+
+<br>
+</span>
+<div class="w3-container" id="paper">
+  <div class="w3-content" style="max-width:850px">
+    <br><center><img src="teaser.png" style="max-width:100%" /></center><br>
+    <p>
+We propose DualConvMesh-Nets (DCM-Net) a family of deep hierarchical convolutional networks over 3D geometric data that combines two types of convolutions. The first type, geodesic convolutions, defines the kernel weights over mesh surfaces or graphs. That is, the convolutional kernel weights are mapped to the local surface of a given mesh. The second type, Euclidean convolutions, is independent of any underlying mesh structure. The convolutional kernel is applied on a neighborhood obtained from a local affinity representation based on the Euclidean distance between 3D points. Intuitively, geodesic convolutions can easily separate objects that are spatially close but have disconnected surfaces, while Euclidean convolutions can represent interactions between nearby objects better, as they are oblivious to object surfaces. To realize a multi-resolution architecture, we borrow well-established mesh simplification methods from the geometry processing domain and adapt them to define mesh-preserving pooling and unpooling operations. We experimentally show that combining both types of convolutions in our architecture leads to significant performance gains for 3D semantic segmentation, and we report competitive results on three scene segmentation benchmarks.
+    </p>
+
+    <h3 class="w3-left-align" id="publication"><b>Publication</b></h3>
+    <a href="engelmann_cvpr2020_3D-MPA.pdf">Paper</a> IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2020.</br></br>
+    <center>
+      <a href="schult_cvpr2020_DCM-Net.pdf"><img src="paper.jpg" style="max-width:100%" /></a>
+      </center><br>
+
+      <h3 class="w3-left-align" id="code"><b>Code</b></h3>
+      <a href="https://github.com/VisualComputingInstitute/dcm-net">Code on GitHub</a>
+
+
+      <h3 class="w3-left-align" id="bibtex"><b>BibTeX</b></h3>
+    <pre class="w3-panel w3-leftbar w3-light-grey" style="white-space: pre-wrap; font-family: monospace; font-size: 11px">
+@inproceedings{Schult20CVPR,
+  author = {Jonas Schult* and Francis Engelmann* and Theodora Kontogianni and Bastian Leibe},
+  title = {{DualConvMesh-Net: Joint Geodesic and Euclidean Convolutions on 3D Meshes}},
+  booktitle = {{IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}},
+  year = {2020}
+}
+</pre>
+  </div>
+
+
+</div>
+</br>
+</br>
+</br>
+</body>
+</html>
