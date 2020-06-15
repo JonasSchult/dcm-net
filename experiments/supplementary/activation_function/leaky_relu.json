@@ -1,0 +1,174 @@
+{
+    "name": "leaky_relu",
+    "id": 1,
+    "n_gpu": 1,
+    "arch": {
+        "type": "DualConvMeshNet",
+        "args": {
+            "feature_number": 9,
+            "num_propagation_steps": 3,
+            "geo_filter": [32, 32, 32, 32],
+            "euc_filter": [32, 32, 32, 32],
+            "activation": "LeakyReLU",
+            "pooling_method": "mean",
+            "aggr": "mean",
+            "num_classes": 21
+        }
+    },
+    "train_transform": [
+        {
+            "type": "RadiusNeighbors",
+            "args": {
+              "radius": [0.12, 0.25, 0.5, 1.0],
+              "max_neigh": 200
+            }
+        },
+        {
+            "type": "EdgeSampling",
+            "args": {
+              "alpha": 1.0,
+              "cutoff": 15
+            }
+        },
+        {
+            "type": "CoordsNormalization",
+            "args": {
+                "max_sizes": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            }
+        },
+        {
+            "type": "RandomLinearTransformation",
+            "args": {
+                "flip": true
+            }
+        },
+        {
+            "type": "RandomRotation",
+            "args": {}
+        },
+        {
+            "type": "ColorNormalization",
+            "args": {
+                "begin": 0,
+                "end": 1
+            }
+        }
+    ],
+    "valid_transform": [
+        {
+            "type": "RadiusNeighbors",
+            "args": {
+              "radius": [0.12, 0.25, 0.5, 1.0],
+              "max_neigh": 200
+            }
+        },
+        {
+            "type": "EdgeSampling",
+            "args": {
+              "alpha": 1.0,
+              "cutoff": 25
+            }
+        },
+        {
+            "type": "CoordsNormalization",
+            "args": {
+                "max_sizes": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            }
+        },
+        {
+            "type": "ColorNormalization",
+            "args": {
+                "begin": 0,
+                "end": 1
+            }
+        }
+    ],
+    "sample_checker": [
+        {
+            "type": "RatioUnlabeled",
+            "args": {
+                "threshold": 0.8
+            }
+        },
+        {
+            "type": "EnoughPoints",
+            "args": {
+                "threshold": 50
+            }
+        }
+    ],
+    "train_dataset": {
+        "type": "ScanNet",
+        "args": {
+            "root_dir": "data/scannet/scannet_qem_blocks",
+            "start_level": 0,
+            "end_level": 4,
+            "is_train": true,
+            "get_coords": true
+        }
+    },
+    "valid_dataset": {
+        "type": "ScanNet",
+        "args": {
+            "root_dir": "data/scannet/scannet_qem_rooms",
+            "start_level": 0,
+            "end_level": 4,
+            "is_train": false,
+            "benchmark": false,
+            "get_coords": true
+        }
+    },
+    "train_data_loader": {
+        "args": {
+            "batch_size": 4,
+            "shuffle": true,
+            "num_workers": 20
+        }
+    },
+    "valid_data_loader": {
+        "args": {
+            "batch_size": 1,
+            "shuffle": true,
+            "num_workers": 10
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args": {
+            "lr": 0.001
+        }
+    },
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 40,
+            "gamma": 0.5
+        }
+    },
+    "loss": {
+        "type": "WeightedCELoss",
+        "args": {
+            "weights_name": "texturenet"
+        }
+    },
+    "metrics": [
+        "sem_seg_scores"
+    ],
+    "trainer": {
+        "epochs": 500,
+        "save_dir": "saved/",
+        "verbosity": 2,
+        "monitor": "min val_loss",
+        "tensorboardX": true,
+        "log_dir": "saved/runs",
+        "iterations": 1
+    }
+}
